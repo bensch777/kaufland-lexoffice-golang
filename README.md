@@ -11,3 +11,7 @@
 ## To Do:
  - Implement https://sellerapi.kaufland.com/?page=reports
  - Automatische Buchungen
+
+
+# Beispiel in Lexoffice
+![Lexoffice](src/example.jpg)
