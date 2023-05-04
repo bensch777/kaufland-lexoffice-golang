@@ -5,6 +5,7 @@ import (
     "fmt"
     "os"
     "strings"
+    "strconv"
 )
 
 func main() {
@@ -38,14 +39,36 @@ func main() {
     writer := csv.NewWriter(outputFile)
     writer.Write([]string{"Auftraggeber", "Empfänger", "Buchungsdatum", "Verwendungszweck", "Betrag"})
     for _, record := range records {
-        if (strings.Contains(record[5], "Verkaufserlös") || strings.Contains(record[5], "Release") ) && !strings.Contains(record[5], "Storno")  {
-            fmt.Println("Kaufland: "+record[2]+" "+record[6])
-            writer.Write([]string{""+record[3]+" "+record[4]+"","Kaufland", ""+record[0]+"", "Bestellnummer: "+record[2]+"", record[6]})
-            
-         } 
- 
+        if (strings.Contains(record[5], "Verkaufserlös") || strings.Contains(record[5], "Release") ) && !strings.Contains(record[5], "Storno")  { 
+            fmt.Println("Kaufland: "+record[2]+" "+priceConverter(record[6], record[8]))
+            writer.Write([]string{""+record[3]+" "+record[4]+"","Kaufland", ""+record[0]+"", "Bestellnummer: "+record[2]+"", priceConverter(record[6], record[8])})
+         }  
     }
     writer.Flush()
 
     fmt.Println("Ausgabe-CSV-Datei erfolgreich erstellt.")
+}
+
+
+func priceConverter (price1Str string, price2Str string) string {
+    // Ersetze das Komma durch einen Punkt und konvertiere in eine Dezimalzahl
+    price1Str = strings.Replace(price1Str, ",", ".", 1)
+    price1, err := strconv.ParseFloat(price1Str, 64)
+    if err != nil {
+        fmt.Println("Fehler beim Konvertieren von Preis 1:", err)
+    }
+
+    price2Str = strings.Replace(price2Str, ",", ".", 1)
+    price2, err := strconv.ParseFloat(price2Str, 64)
+    if err != nil {
+        fmt.Println("Fehler beim Konvertieren von Preis 2:", err)
+    }
+
+    // Addiere die Preise
+    totalPrice := price1 + price2
+
+    // Konvertiere in das gewünschte Format
+    totalPriceStr := strings.Replace(fmt.Sprintf("%.2f", totalPrice), ".", ",", 1)
+
+    return totalPriceStr
 }
