@@ -42,7 +42,10 @@ func main() {
         if (strings.Contains(record[5], "Verkaufserlös") || strings.Contains(record[5], "Release") ) && !strings.Contains(record[5], "Storno")  { 
             fmt.Println("Kaufland: "+record[2]+" "+priceConverter(record[6], record[8]))
             writer.Write([]string{""+record[3]+" "+record[4]+"","Kaufland", ""+record[0]+"", "Bestellnummer: "+record[2]+"", priceConverter(record[6], record[8])})
-         }  
+         } else if strings.Contains(record[5], "Auszahlung") || strings.Contains(record[5], "Payout"){
+            fmt.Println("Auszahlung: "+record[0]+ " "+record[13]+" €")
+            writer.Write([]string{"Kaufland", "Konto", ""+record[0]+"", "Auszahlung auf Bankkonto", record[13]})
+        } 
     }
     writer.Flush()
 
