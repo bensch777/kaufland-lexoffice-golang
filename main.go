@@ -38,7 +38,7 @@ func main() {
     writer := csv.NewWriter(outputFile)
     writer.Write([]string{"Auftraggeber", "Empfänger", "Buchungsdatum", "Verwendungszweck", "Betrag"})
     for _, record := range records {
-        if (strings.Contains(record[5], "Verkaufserlös") || strings.Contains(record[1], "Release") ) && !strings.Contains(record[1], "Storno")  {
+        if (strings.Contains(record[5], "Verkaufserlös") || strings.Contains(record[5], "Release") ) && !strings.Contains(record[5], "Storno")  {
             fmt.Println("Kaufland: "+record[2]+" "+record[6])
             writer.Write([]string{""+record[3]+" "+record[4]+"","Kaufland", ""+record[0]+"", "Bestellnummer: "+record[2]+"", record[6]})
             
