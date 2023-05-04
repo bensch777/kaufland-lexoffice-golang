@@ -12,7 +12,7 @@ go run main.go
 ```
 - [Bankübersicht](https://app.lexoffice.de/fis/olb4/#/hub) in Lexoffice öffnen und bei dem Kaufland Konto die drei Punkte Auswählen und den CSV Import starten.
 
-**Hinweise**
+**Hinweise ⚠️**
 - Weder das Helfer Tool noch Lexoffice verfügen über eine Prüfung von doppelten Einträgen. Daher empfehle ich, den Buchungsreport aus der "Auszahlungs" E-Mail zu verwenden und nicht von der Reportsseite. Im schlimmsten Fall könnten Buchungen doppelt in Lexoffice auftauchen.
 - Es werden nur Verkaufserlöse berücksichtigt, um Rechnungen als bezahlt zu markieren. Provisionen oder Anzeigengebühren werden nicht erfasst, da diese in einigen Fällen nicht korrekt gegen die monatliche Kaufland-Rechnung verbucht werden können.
 - Aktuell werden Buchungsreports für Deutschland und die Slowakei unterstützt.
